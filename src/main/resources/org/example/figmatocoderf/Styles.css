@@ -6,6 +6,14 @@
     -fx-background-color: #b87f31;
 }
 
+.button:hover {
+    -fx-background-color: #baa890;
+}
+
+.button:focused {
+    -fx-background-color: #1aab43;
+}
+
 .left_panel {
     -fx-background-color: #b87f31;
 }
