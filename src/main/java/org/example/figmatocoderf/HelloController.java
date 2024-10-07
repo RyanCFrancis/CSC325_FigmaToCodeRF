@@ -69,19 +69,8 @@ public class HelloController {
     @FXML
     private void addStudent(){
         int id = (Integer) Integer.parseInt(idTF.getText());
-        String fname = fnameTF.getText();
-        String lname = lnameTF.getText();
-        String dept = deptTF.getText();
-        String major = majorTF.getText();
-        String email = emailTF.getText();
-
-        studentList.add(new Student(id,fname,lname,dept,major,email));
-        idTF.clear();
-        fnameTF.clear();
-        lnameTF.clear();
-        deptTF.clear();
-        majorTF.clear();
-        emailTF.clear();
+        studentList.add(getTypedStudentData());
+        clearTextFields();
     }
 
     @FXML
@@ -99,6 +88,7 @@ public class HelloController {
     private void editStudent(){
         if (!editing){
             Student stud = tableViewStudents.getSelectionModel().getSelectedItem();
+            //fill in fields with content to change
             idTF.setText(stud.getId().toString());
             fnameTF.setText(stud.getFirstName());
             lnameTF.setText(stud.getLastName());
@@ -112,39 +102,55 @@ public class HelloController {
         else{
             Student oldStud = tableViewStudents.getSelectionModel().getSelectedItem();
             int i = tableViewStudents.getSelectionModel().getSelectedIndex();
-            int id = Integer.parseInt(idTF.getText());
-            String fname = fnameTF.getText();
-            String lname = lnameTF.getText();
-            String dept = deptTF.getText();
-            String major = majorTF.getText();
-            String email = emailTF.getText();
+
 
 //            Student newStud = new Student(id,fname,lname,dept,major,email);
 ////            studentList.remove(oldStud);
 ////            studentList.add(newStud);
 //            studentList.add(i,newStud);
 //            studentList.
-            oldStud.setFirstName(fname);
-            oldStud.setId(id);
-            oldStud.setLastName(lname);
-            oldStud.setMajor(major);
-            oldStud.setDepartment(dept);
-            oldStud.setEmail(email);
+            Student temp = getTypedStudentData();
+
+            //change data in the student object to the newly entered/edited data
+            oldStud.setFirstName(temp.getFirstName());
+            oldStud.setId(temp.getId());
+            oldStud.setLastName(temp.getLastName());
+            oldStud.setMajor(temp.getMajor());
+            oldStud.setDepartment(temp.getDepartment());
+            oldStud.setEmail(temp.getEmail());
             tableViewStudents.refresh();
 
             editbtn.setText("Edit");
             editing = false;
 
-            idTF.clear();
-            fnameTF.clear();
-            lnameTF.clear();
-            deptTF.clear();
-            majorTF.clear();
-            emailTF.clear();
+            clearTextFields();
+
 
         }
 
     }
+
+    private void clearTextFields(){
+        idTF.clear();
+        fnameTF.clear();
+        lnameTF.clear();
+        deptTF.clear();
+        majorTF.clear();
+        emailTF.clear();
+    }
+
+    private Student getTypedStudentData(){
+        int id = Integer.parseInt(idTF.getText());
+        String fname = fnameTF.getText();
+        String lname = lnameTF.getText();
+        String dept = deptTF.getText();
+        String major = majorTF.getText();
+        String email = emailTF.getText();
+
+        return new Student(id,fname,lname,dept,major,email);
+
+    }
+
 
 
 }
