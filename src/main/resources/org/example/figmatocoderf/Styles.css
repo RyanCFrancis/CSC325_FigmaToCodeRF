@@ -12,6 +12,7 @@
 
 .button:focused {
     -fx-background-color: #1aab43;
+    -fx-text-fill: #ffffff;
 }
 
 .left_panel {
